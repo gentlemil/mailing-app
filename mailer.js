@@ -1,15 +1,16 @@
 import nodemailer from 'nodemailer'
+import config from './config.js'
 
 export async function sendWelcomeMessage(email) {
   const testAccount = await nodemailer.createTestAccount()
 
   const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587, // 465 crypted,
-    secure: false, // no SSL (no 465)
+    host: config.host, // 'smtp.ethereal.email',
+    port: config.port, // 587, // 465 crypted,
+    secure: config.port === 465, // false, // no SSL (no 465)
     auth: {
-      user: testAccount.user,
-      pass: testAccount.pass,
+      user: config.user, // testAccount.user,
+      pass: config.password, // testAccount.pass,
     },
   })
 
